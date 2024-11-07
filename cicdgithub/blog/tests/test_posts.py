@@ -1,5 +1,5 @@
 from django.test import TestCase
-from .models import Post
+from posts.models import Post  # Correct absolute import
 
 
 class PostModelTest(TestCase):

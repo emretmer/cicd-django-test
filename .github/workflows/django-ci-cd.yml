@@ -33,12 +33,13 @@ jobs:
       run: echo "DJANGO_SETTINGS_MODULE=blog.settings" >> $GITHUB_ENV  # Django settings modülünü ayarla
 
     - name: Set PYTHONPATH
-      run: echo "PYTHONPATH=$(pwd)/blog" >> $GITHUB_ENV  # PYTHONPATH'i blog dizinine ayarla
-
+      run: echo "PYTHONPATH=$GITHUB_WORKSPACE/cicdgithub" >> $GITHUB_ENV  # PYTHONPATH'i cicdgithub dizinine ayarla
+    
     - name: Run tests
       run: |
         . venv/bin/activate  # Virtual environment'ı aktive et
-        pytest $GITHUB_WORKSPACE/blog/posts/tests.py  # Testleri çalıştır
+        pytest $GITHUB_WORKSPACE/cicdgithub/blog/posts/tests  # Belirtilen dizindeki tüm testleri çalıştır
+    
 
     - name: Update requirements.txt
       run: |
