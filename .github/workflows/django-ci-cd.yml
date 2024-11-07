@@ -44,6 +44,20 @@ jobs:
         source venv/bin/activate  # Virtual environment'ı aktive et
         pip freeze > requirements.txt  # Mevcut bağımlılıkları requirements.txt dosyasına yaz
 
+    # Docker Build Adımları
+    - name: Build Docker image
+      run: |
+        docker build -t mydjangoapp .  # Docker imajını oluştur
+
+    - name: Run Docker container for tests
+      run: |
+        docker run -d --name mydjangoapp-container mydjangoapp  # Docker konteynerını çalıştır
+        docker exec mydjangoapp-container python manage.py test  # Testleri çalıştır
+
+    - name: Remove Docker container
+      run: |
+        docker stop mydjangoapp-container  # Konteynerı durdur
+        docker rm mydjangoapp-container  # Konteynerı sil
 
   deploy:
     runs-on: ubuntu-latest
@@ -70,17 +84,21 @@ jobs:
     - name: Run migrations
       run: |
           source venv/bin/activate  # Virtual environment'ı aktive et
-          pip install django
           python cicdgithub/blog/manage.py migrate  # Veritabanı migrasyonlarını çalıştır
-      
+
     - name: Collect static files
       run: |
           source venv/bin/activate  # Virtual environment'ı aktive et
-          pip install django
           python cicdgithub/blog/manage.py collectstatic --noinput  # Statik dosyaları topla
-      
 
-    - name: Deploy to server
+    # Docker Deployment Adımları
+    - name: Deploy with Docker
       run: |
-        # Deployment komutlarını burada ekleyin
-        echo "Deploying application"  # Uygulama dağıtımını buraya ekleyin
+        docker build -t mydjangoapp .  # Docker imajını oluştur
+        docker run -d -p 8000:8000 --name mydjangoapp-container mydjangoapp  # Docker konteynerını çalıştır
+        # Deploy işlemi sonrasında uygulamayı aktif et
+
+    - name: Clean up Docker containers
+      run: |
+        docker stop mydjangoapp-container  # Konteynerı durdur
+        docker rm mydjangoapp-container  # Konteynerı sil
