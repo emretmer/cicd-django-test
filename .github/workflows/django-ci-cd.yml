@@ -26,12 +26,12 @@ jobs:
     - name: Install dependencies
       run: |
         python -m venv venv  # Sanal ortam oluştur
-        source venv/bin/activate  # Sanal ortamı aktifleştir
+        venv/bin/activate  # Sanal ortamı aktifleştir
         pip install -r requirements.txt  # Gereksinimlerinizi yükler
 
     - name: Run tests
       run: |
-        source venv/bin/activate
+        venv/bin/activate
         pytest  # Testleri çalıştırır
 
   # Deploy job
