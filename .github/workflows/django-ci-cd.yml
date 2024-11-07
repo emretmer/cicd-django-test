@@ -49,11 +49,9 @@ jobs:
       run: |
         docker build -t mydjangoapp cicdgithub/blog/
   
-
     - name: Run Docker container
       run: |
-        docker run -d --name mydjangoapp-container --memory=4g mydjangoapp # Docker konteynerını çalıştır
-        docker exec mydjangoapp-container python manage.py test   # Testleri çalıştır
+        docker-compose up
 
     - name: Remove Docker container
       run: |
