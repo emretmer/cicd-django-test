@@ -24,14 +24,14 @@ jobs:
     - name: Install dependencies
       run: |
         python -m venv venv  # Virtual environment oluştur
-        source venv/bin/activate  # Virtual environment'ı aktive et
+        . venv/bin/activate  # Virtual environment'ı aktive et
         pip install --upgrade pip  # pip'i güncelle
         pip install django  # Django'yu kur
         pip install pytest pytest-django  # Test bağımlılıklarını kur
 
     - name: Update requirements.txt
       run: |
-        source venv/bin/activate  # Virtual environment'ı aktive et
+        . venv/bin/activate  # Virtual environment'ı aktive et
         pip freeze > requirements.txt  # Mevcut bağımlılıkları requirements.txt dosyasına yaz
 
     - name: Set DJANGO_SETTINGS_MODULE
@@ -39,7 +39,7 @@ jobs:
 
     - name: Run tests
       run: |
-        source venv/bin/activate  # Virtual environment'ı aktive et
+        . venv/bin/activate  # Virtual environment'ı aktive et
         pytest  # Testleri çalıştır
 
   deploy:
@@ -59,7 +59,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m venv venv  # Virtual environment oluştur
-        source venv/bin/activate  # Virtual environment'ı aktive et
+        . venv/bin/activate  # Virtual environment'ı aktive et
         pip install --upgrade pip  # pip'i güncelle
         pip freeze > requirements.txt  # Mevcut bağımlılıkları requirements.txt dosyasına yaz
 
