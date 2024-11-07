@@ -38,8 +38,7 @@ jobs:
     - name: Run tests
       run: |
         . venv/bin/activate  # Virtual environment'ı aktive et
-        pytest blog/posts/tests.py  # Test dosyasını doğru yoldan çalıştır
-      working-directory: $(pwd)/blog  # Testleri çalıştır
+        pytest $GITHUB_WORKSPACE/blog/posts/tests.py  # Testleri çalıştır
 
     - name: Update requirements.txt
       run: |
