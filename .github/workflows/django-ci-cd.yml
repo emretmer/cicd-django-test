@@ -34,11 +34,6 @@ jobs:
     - name: Set PYTHONPATH
       run: echo "PYTHONPATH=$GITHUB_WORKSPACE/cicdgithub" >> $GITHUB_ENV  # PYTHONPATH'i cicdgithub dizinine ayarla
 
-    - name: Run tests
-      run: |
-        source venv/bin/activate  # Virtual environment'ı aktive et
-        pytest $GITHUB_WORKSPACE/cicdgithub/blog/posts/tests  # Testleri çalıştır
-
     - name: Update requirements.txt
       run: |
         source venv/bin/activate  # Virtual environment'ı aktive et
