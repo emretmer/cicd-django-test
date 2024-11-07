@@ -47,7 +47,8 @@ jobs:
     # Docker Build Adımları
     - name: Build Docker image
       run: |
-        docker build -t mydjangoapp .  # Docker imajını oluştur
+        docker build -t mydjangoapp cicdgithub/blog/
+  
 
     - name: Run Docker container for tests
       run: |
