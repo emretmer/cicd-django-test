@@ -16,9 +16,6 @@ jobs:
     - name: Check out code
       uses: actions/checkout@v3
 
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v2
-
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
@@ -47,15 +44,6 @@ jobs:
         source venv/bin/activate  # Virtual environment'ı aktive et
         pip freeze > requirements.txt  # Mevcut bağımlılıkları requirements.txt dosyasına yaz
 
-    - name: Build Docker image
-      run: |
-        docker build -t myapp:$GITHUB_SHA .  # Docker imajını oluştur
-
-    - name: Push Docker image to Docker Hub
-      run: |
-        docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}  # Docker Hub giriş yap
-        docker tag myapp:$GITHUB_SHA myusername/myapp:$GITHUB_SHA  # Docker imajını tag'le
-        docker push myusername/myapp:$GITHUB_SHA  # Docker imajını Docker Hub'a push et
 
   deploy:
     runs-on: ubuntu-latest
@@ -65,9 +53,6 @@ jobs:
     steps:
     - name: Check out code
       uses: actions/checkout@v3
-
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v2
 
     - name: Set up Python
       uses: actions/setup-python@v4
@@ -87,14 +72,15 @@ jobs:
           source venv/bin/activate  # Virtual environment'ı aktive et
           pip install django
           python cicdgithub/blog/manage.py migrate  # Veritabanı migrasyonlarını çalıştır
-
+      
     - name: Collect static files
       run: |
           source venv/bin/activate  # Virtual environment'ı aktive et
           pip install django
           python cicdgithub/blog/manage.py collectstatic --noinput  # Statik dosyaları topla
+      
 
-    - name: Deploy to server using Docker
+    - name: Deploy to server
       run: |
-        docker pull myusername/myapp:$GITHUB_SHA  # Docker imajını pull et
-        docker run -d -p 8000:8000 myusername/myapp:$GITHUB_SHA  # Docker container'ı çalıştır
+        # Deployment komutlarını burada ekleyin
+        echo "Deploying application"  # Uygulama dağıtımını buraya ekleyin
