@@ -105,7 +105,7 @@ jobs:
     # Docker Deployment Adımları
     - name: Deploy with Docker
       run: |
-        docker build -t mydjangoapp .  # Docker imajını oluştur
+        docker build -t mydjangoapp  cicdgithub/blog/  # Docker imajını oluştur
         docker run -d -p 8000:8000 --name mydjangoapp-container mydjangoapp  # Docker konteynerını çalıştır
         # Deploy işlemi sonrasında uygulamayı aktif et
 
