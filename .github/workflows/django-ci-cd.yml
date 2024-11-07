@@ -23,18 +23,18 @@ jobs:
 
     - name: Install dependencies
       run: |
-        python -m venv venv  # Create virtual environment
+        python -m venv venv  # Create a virtual environment
         source venv/bin/activate  # Activate virtual environment
-        pip install --upgrade pip  # Upgrade pip to the latest version
-        pip install django  # Install Django
-        pip install pytest  # Install pytest
-        pip install pytest-django  # Install pytest-django
-        pip freeze > requirements.txt  # Freeze the installed packages into requirements.txt
+        pip freeze > requirements.txt  # Install dependencies from requirements.txt
+        pip install pytest pytest-django  # Install testing dependencies
+
+    - name: Set DJANGO_SETTINGS_MODULE
+      run: echo "DJANGO_SETTINGS_MODULE=myproject.settings" >> $GITHUB_ENV  # Set settings module
 
     - name: Run tests
       run: |
         source venv/bin/activate  # Activate virtual environment
-        pytest  # Run the tests
+        pytest  # Run tests
 
   deploy:
     runs-on: ubuntu-latest
@@ -52,14 +52,11 @@ jobs:
 
     - name: Install dependencies
       run: |
-        python -m venv venv  # Create virtual environment
-        source venv/bin/activate  # Activate virtual environment
-        pip install --upgrade pip  # Upgrade pip to the latest version
-        pip freeze > requirements.txt  # Install dependencies from the frozen requirements.txt
+        python -m venv venv
+        source venv/bin/activate
+        pip freeze > requirements.txt
 
     - name: Deploy to server
       run: |
-        # Add your deployment commands here, for example:
+        # Add your deployment commands here
         echo "Deploying application"
-        # e.g., SSH into the server, pull the latest code, install dependencies, restart services
-        # ssh user@your-server "cd /path/to/app && git pull origin main && pip install -r requirements.txt && systemctl restart your-app-service"
