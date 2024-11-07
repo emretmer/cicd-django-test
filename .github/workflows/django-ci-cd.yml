@@ -23,19 +23,24 @@ jobs:
 
     - name: Install dependencies
       run: |
-        python -m venv venv  # Create a virtual environment
-        source venv/bin/activate  # Activate virtual environment
-        pip freeze > requirements.txt  # Install dependencies from requirements.txt
-        pip install --upgrade pip
-        pip install pytest pytest-django  # Install testing dependencies
+        python -m venv venv  # Virtual environment oluştur
+        source venv/bin/activate  # Virtual environment'ı aktive et
+        pip install --upgrade pip  # pip'i güncelle
+        pip install django  # Django'yu kur
+        pip install pytest pytest-django  # Test bağımlılıklarını kur
+
+    - name: Update requirements.txt
+      run: |
+        source venv/bin/activate  # Virtual environment'ı aktive et
+        pip freeze > requirements.txt  # Mevcut bağımlılıkları requirements.txt dosyasına yaz
 
     - name: Set DJANGO_SETTINGS_MODULE
-      run: echo "DJANGO_SETTINGS_MODULE=posts.settings" >> $GITHUB_ENV  # Set settings module
+      run: echo "DJANGO_SETTINGS_MODULE=posts.settings" >> $GITHUB_ENV  # Django settings modülünü ayarla
 
     - name: Run tests
       run: |
-        source venv/bin/activate  # Activate virtual environment
-        pytest  # Run tests
+        source venv/bin/activate  # Virtual environment'ı aktive et
+        pytest  # Testleri çalıştır
 
   deploy:
     runs-on: ubuntu-latest
@@ -53,11 +58,12 @@ jobs:
 
     - name: Install dependencies
       run: |
-        python -m venv venv
-        source venv/bin/activate
-        pip freeze > requirements.txt  # Install dependencies from requirements.txt
+        python -m venv venv  # Virtual environment oluştur
+        source venv/bin/activate  # Virtual environment'ı aktive et
+        pip install --upgrade pip  # pip'i güncelle
+        pip freeze > requirements.txt  # Mevcut bağımlılıkları requirements.txt dosyasına yaz
 
     - name: Deploy to server
       run: |
-        # Add your deployment commands here
+        # Deployment komutlarını burada ekleyin
         echo "Deploying application"
