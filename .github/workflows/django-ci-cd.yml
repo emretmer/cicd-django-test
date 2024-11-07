@@ -30,7 +30,7 @@ jobs:
         pip install pytest pytest-django  # Install testing dependencies
 
     - name: Set DJANGO_SETTINGS_MODULE
-      run: echo "DJANGO_SETTINGS_MODULE=blog.settings" >> $GITHUB_ENV  # Set settings module
+      run: echo "DJANGO_SETTINGS_MODULE=posts.settings" >> $GITHUB_ENV  # Set settings module
 
     - name: Run tests
       run: |
