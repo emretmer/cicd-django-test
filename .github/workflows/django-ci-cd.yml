@@ -29,11 +29,6 @@ jobs:
         pip install django  # Django'yu kur
         pip install pytest pytest-django  # Test bağımlılıklarını kur
 
-    - name: Update requirements.txt
-      run: |
-        . venv/bin/activate  # Virtual environment'ı aktive et
-        pip freeze > requirements.txt  # Mevcut bağımlılıkları requirements.txt dosyasına yaz
-
     - name: Set DJANGO_SETTINGS_MODULE
       run: echo "DJANGO_SETTINGS_MODULE=blog.settings" >> $GITHUB_ENV  # Django settings modülünü ayarla
 
@@ -41,6 +36,11 @@ jobs:
       run: |
         . venv/bin/activate  # Virtual environment'ı aktive et
         pytest  # Testleri çalıştır
+
+    - name: Update requirements.txt
+      run: |
+        . venv/bin/activate  # Virtual environment'ı aktive et
+        pip freeze > requirements.txt  # Mevcut bağımlılıkları requirements.txt dosyasına yaz
 
   deploy:
     runs-on: ubuntu-latest
