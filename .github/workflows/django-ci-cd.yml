@@ -62,18 +62,18 @@ jobs:
     - name: Install dependencies
       run: |
         python -m venv venv  # Virtual environment oluştur
-        . venv/bin/activate  # Virtual environment'ı aktive et
+        source venv/bin/activate  # Virtual environment'ı aktive et
         pip install --upgrade pip  # pip'i güncelle
         pip freeze > requirements.txt  # requirements.txt dosyasındaki bağımlılıkları kur
 
     - name: Run migrations
       run: |
-          . venv/bin/activate  # Virtual environment'ı aktive et
+          source venv/bin/activate  # Virtual environment'ı aktive et
           python cicdgithub/blog/manage.py migrate  # Veritabanı migrasyonlarını çalıştır
       
     - name: Collect static files
       run: |
-          . venv/bin/activate  # Virtual environment'ı aktive et
+          source venv/bin/activate  # Virtual environment'ı aktive et
           python cicdgithub/blog/manage.py collectstatic --noinput  # Statik dosyaları topla
       
 
