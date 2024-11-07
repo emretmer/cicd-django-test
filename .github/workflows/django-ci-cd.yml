@@ -35,7 +35,7 @@ jobs:
         pip freeze > requirements.txt  # Mevcut bağımlılıkları requirements.txt dosyasına yaz
 
     - name: Set DJANGO_SETTINGS_MODULE
-      run: echo "DJANGO_SETTINGS_MODULE=posts.settings" >> $GITHUB_ENV  # Django settings modülünü ayarla
+      run: echo "DJANGO_SETTINGS_MODULE=blog.settings" >> $GITHUB_ENV  # Django settings modülünü ayarla
 
     - name: Run tests
       run: |
