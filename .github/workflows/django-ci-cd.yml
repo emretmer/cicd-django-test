@@ -25,8 +25,7 @@ jobs:
       run: |
         python -m venv venv  # Create a virtual environment
         source venv/bin/activate  # Activate virtual environment
-        pip install django
-        pip freeze > requirements.txt  # Install dependencies from requirements.txt
+        pip install -r requirements.txt  # Install dependencies from requirements.txt
         pip install pytest pytest-django  # Install testing dependencies
 
     - name: Set DJANGO_SETTINGS_MODULE
@@ -55,7 +54,7 @@ jobs:
       run: |
         python -m venv venv
         source venv/bin/activate
-        pip freeze > requirements.txt
+        pip install -r requirements.txt  # Install dependencies from requirements.txt
 
     - name: Deploy to server
       run: |
