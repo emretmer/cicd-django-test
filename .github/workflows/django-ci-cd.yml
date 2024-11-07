@@ -31,12 +31,12 @@ jobs:
       run: |
         python -m venv venv  # Sanal ortam oluştur
         chmod +x venv/bin/activate  # 'activate' dosyasına çalıştırma izni ver
-        venv/bin/activate  # '.' ile sanal ortamı aktifleştir
+        . venv/bin/activate  # '.' ile sanal ortamı aktifleştir
         pip freeze > requirements.txt  # Gereksinimlerinizi yükler
 
     - name: Run tests
       run: |
-        venv/bin/activate  # '.' ile sanal ortamı aktifleştir
+        . venv/bin/activate  # '.' ile sanal ortamı aktifleştir
         pytest  # Testleri çalıştırır
 
   # Deploy job
@@ -58,7 +58,7 @@ jobs:
       run: |
         python -m venv venv
         chmod +x venv/bin/activate  # 'activate' dosyasına çalıştırma izni ver
-        venv/bin/activate  # '.' ile sanal ortamı aktifleştir
+        . venv/bin/activate  # '.' ile sanal ortamı aktifleştir
         pip freeze > requirements.txt  # Gereksinimlerinizi yükler
 
     - name: Deploy to server
