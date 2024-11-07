@@ -23,18 +23,18 @@ jobs:
 
     - name: Install dependencies
       run: |
-        python -m venv venv  # Sanal ortam oluştur
-        pip install django
-        source venv/bin/activate  # Sanal ortamı aktifleştir
-        pip freeze > requirements.txt  # Gereksinimlerinizi yükler
-        pip install pytest  # pytest'i yükler
-        pip install pytest-django
-
+        python -m venv venv  # Create virtual environment
+        source venv/bin/activate  # Activate virtual environment
+        pip install --upgrade pip  # Upgrade pip to the latest version
+        pip install django  # Install Django
+        pip install pytest  # Install pytest
+        pip install pytest-django  # Install pytest-django
+        pip freeze > requirements.txt  # Freeze the installed packages into requirements.txt
 
     - name: Run tests
       run: |
-        source venv/bin/activate  # Sanal ortamı aktifleştir
-        pytest  # Testleri çalıştırır
+        source venv/bin/activate  # Activate virtual environment
+        pytest  # Run the tests
 
   deploy:
     runs-on: ubuntu-latest
@@ -52,11 +52,14 @@ jobs:
 
     - name: Install dependencies
       run: |
-        python -m venv venv
-        source venv/bin/activate
-        pip freeze > requirements.txt
+        python -m venv venv  # Create virtual environment
+        source venv/bin/activate  # Activate virtual environment
+        pip install --upgrade pip  # Upgrade pip to the latest version
+        pip freeze > requirements.txt  # Install dependencies from the frozen requirements.txt
 
     - name: Deploy to server
       run: |
-        # Deploy komutlarınızı buraya ekleyin
+        # Add your deployment commands here, for example:
         echo "Deploying application"
+        # e.g., SSH into the server, pull the latest code, install dependencies, restart services
+        # ssh user@your-server "cd /path/to/app && git pull origin main && pip install -r requirements.txt && systemctl restart your-app-service"
