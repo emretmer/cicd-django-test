@@ -32,6 +32,9 @@ jobs:
     - name: Set DJANGO_SETTINGS_MODULE
       run: echo "DJANGO_SETTINGS_MODULE=blog.settings" >> $GITHUB_ENV  # Django settings modülünü ayarla
 
+    - name: Set PYTHONPATH
+      run: echo "PYTHONPATH=$(pwd)/blog" >> $GITHUB_ENV  # PYTHONPATH'i blog dizinine ayarla
+
     - name: Run tests
       run: |
         . venv/bin/activate  # Virtual environment'ı aktive et
@@ -61,9 +64,19 @@ jobs:
         python -m venv venv  # Virtual environment oluştur
         . venv/bin/activate  # Virtual environment'ı aktive et
         pip install --upgrade pip  # pip'i güncelle
-        pip freeze > requirements.txt  # Mevcut bağımlılıkları requirements.txt dosyasına yaz
+        pip freeze > requirements.txt  # requirements.txt dosyasındaki bağımlılıkları kur
+
+    - name: Run migrations
+      run: |
+        . venv/bin/activate  # Virtual environment'ı aktive et
+        python manage.py migrate  # Veritabanı migrasyonlarını çalıştır
+
+    - name: Collect static files
+      run: |
+        . venv/bin/activate  # Virtual environment'ı aktive et
+        python manage.py collectstatic --noinput  # Static dosyaları topla
 
     - name: Deploy to server
       run: |
         # Deployment komutlarını burada ekleyin
-        echo "Deploying application"
+        echo "Deploying application"  # Uygulama dağıtımını buraya ekleyin
