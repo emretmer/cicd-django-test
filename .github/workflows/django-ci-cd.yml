@@ -61,11 +61,14 @@ jobs:
         cd cicdgithub/blog  # doğru dizine geç
         docker-compose up -d  # Docker Compose ile konteynerları çalıştır
 
-
-    - name: Remove Docker container
+    - name: Stop Docker container if it exists
       run: |
-        docker stop mydjangoapp-container  # Konteynerı durdur
-        docker rm mydjangoapp-container  # Konteynerı sil
+          if [ $(docker ps -q -f name=mydjangoapp-container) ]; then
+            docker stop mydjangoapp-container  # Konteyner varsa durdur
+            docker rm mydjangoapp-container  # Konteynerı sil
+          else
+            echo "No container named mydjangoapp-container running."  # Konteyner çalışmıyorsa mesaj yazdır
+          fi     
 
   deploy:
     runs-on: ubuntu-latest
