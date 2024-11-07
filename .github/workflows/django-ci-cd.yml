@@ -68,13 +68,14 @@ jobs:
 
     - name: Run migrations
       run: |
-        . venv/bin/activate  # Virtual environment'ı aktive et
-        python manage.py migrate  # Veritabanı migrasyonlarını çalıştır
-
+          . venv/bin/activate  # Virtual environment'ı aktive et
+          python cicdgithub/blog/manage.py migrate  # Veritabanı migrasyonlarını çalıştır
+      
     - name: Collect static files
       run: |
-        . venv/bin/activate  # Virtual environment'ı aktive et
-        python manage.py collectstatic --noinput  # Static dosyaları topla
+          . venv/bin/activate  # Virtual environment'ı aktive et
+          python cicdgithub/blog/manage.py collectstatic --noinput  # Statik dosyaları topla
+      
 
     - name: Deploy to server
       run: |
