@@ -21,17 +21,18 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.11.4'  # Python 3.9 kullanacağız
+        python-version: '3.11.4'  # Python 3.11 kullanıyoruz
 
     - name: Install dependencies
       run: |
         python -m venv venv  # Sanal ortam oluştur
-        venv/bin/activate  # Sanal ortamı aktifleştir
+        chmod +x venv/bin/activate  # 'activate' dosyasına çalıştırma izni ver
+        . venv/bin/activate  # '.' ile sanal ortamı aktifleştir
         pip install -r requirements.txt  # Gereksinimlerinizi yükler
 
     - name: Run tests
       run: |
-        venv/bin/activate
+        . venv/bin/activate  # '.' ile sanal ortamı aktifleştir
         pytest  # Testleri çalıştırır
 
   # Deploy job
@@ -52,8 +53,9 @@ jobs:
     - name: Install dependencies
       run: |
         python -m venv venv
-        source venv/bin/activate
-        pip install -r requirements.txt
+        chmod +x venv/bin/activate  # 'activate' dosyasına çalıştırma izni ver
+        . venv/bin/activate  # '.' ile sanal ortamı aktifleştir
+        pip install -r requirements.txt  # Gereksinimlerinizi yükler
 
     - name: Deploy to server
       run: |
