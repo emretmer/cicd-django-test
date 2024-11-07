@@ -64,16 +64,19 @@ jobs:
         python -m venv venv  # Virtual environment oluştur
         source venv/bin/activate  # Virtual environment'ı aktive et
         pip install --upgrade pip  # pip'i güncelle
+        pip install django
         pip freeze > requirements.txt  # requirements.txt dosyasındaki bağımlılıkları kur
 
     - name: Run migrations
       run: |
           source venv/bin/activate  # Virtual environment'ı aktive et
+          pip install django
           python cicdgithub/blog/manage.py migrate  # Veritabanı migrasyonlarını çalıştır
       
     - name: Collect static files
       run: |
           source venv/bin/activate  # Virtual environment'ı aktive et
+          pip install django
           python cicdgithub/blog/manage.py collectstatic --noinput  # Statik dosyaları topla
       
 
