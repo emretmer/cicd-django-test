@@ -38,7 +38,8 @@ jobs:
     - name: Run tests
       run: |
         . venv/bin/activate  # Virtual environment'ı aktive et
-        pytest D:\ENFO\Projects\cicdgithub\cicd-django-test\cicdgithub\blog\posts\tests.py  # Testleri çalıştır
+        pytest blog/posts/tests.py  # Test dosyasını doğru yoldan çalıştır
+      working-directory: $(pwd)/blog  # Testleri çalıştır
 
     - name: Update requirements.txt
       run: |
