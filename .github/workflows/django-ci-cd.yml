@@ -109,6 +109,10 @@ jobs:
         docker run -d -p 8000:8000 --name mydjangoapp-container mydjangoapp  # Docker konteynerını çalıştır
         # Deploy işlemi sonrasında uygulamayı aktif et
 
+    - name: Run tests inside Docker container
+      run: |
+        docker exec -it mydjangoapp-container bash -c "python manage.py test posts.tests.test_hello_world.HelloWorldTest"
+
     - name: Clean up Docker containers
       run: |
         docker stop mydjangoapp-container  # Konteynerı durdur
