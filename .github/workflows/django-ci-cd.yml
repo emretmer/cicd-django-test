@@ -25,6 +25,7 @@ jobs:
       run: |
         python -m venv venv  # Create a virtual environment
         source venv/bin/activate  # Activate virtual environment
+        pip install django
         pip freeze > requirements.txt  # Install dependencies from requirements.txt
         pip install pytest pytest-django  # Install testing dependencies
 
