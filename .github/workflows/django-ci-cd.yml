@@ -48,7 +48,7 @@ jobs:
     - name: Build Docker image
       run: |
         docker build -t mydjangoapp cicdgithub/blog/
-  
+
     # Docker Compose Yükleme ve Çalıştırma
     - name: Set up Docker Compose
       run: |
@@ -58,7 +58,9 @@ jobs:
 
     - name: Run Docker container
       run: |
+        cd cicdgithub/blog  # doğru dizine geç
         docker-compose up -d  # Docker Compose ile konteynerları çalıştır
+
 
     - name: Remove Docker container
       run: |
