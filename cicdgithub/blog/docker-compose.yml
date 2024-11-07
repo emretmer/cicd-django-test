@@ -15,11 +15,10 @@ services:
   web:
     build: .
     environment:
-      - DJANGO_SETTINGS_MODULE=your_project.settings
-    command: python manage.py test
+      - DJANGO_SETTINGS_MODULE=blog.settings
+    command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/usr/src/app
-    working_dir: /usr/src/app
     ports:
       - "8000:8000"
     depends_on:
