@@ -27,6 +27,8 @@ jobs:
         source venv/bin/activate  # Sanal ortamı aktifleştir
         pip freeze > requirements.txt  # Gereksinimlerinizi yükler
         pip install pytest  # pytest'i yükler
+        pip install pytest-django
+
 
     - name: Run tests
       run: |
