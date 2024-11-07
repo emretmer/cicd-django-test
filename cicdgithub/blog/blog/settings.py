@@ -32,6 +32,17 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # Application definition
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv('DJANGO_DB_NAME', 'blog_db'),
+        'USER': os.getenv('DJANGO_DB_USER', 'user'),
+        'PASSWORD': os.getenv('DJANGO_DB_PASSWORD', 'password'),
+        'HOST': os.getenv('DJANGO_DB_HOST', 'localhost'),
+        'PORT': os.getenv('DJANGO_DB_PORT', '5432'),
+    }
+}
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
