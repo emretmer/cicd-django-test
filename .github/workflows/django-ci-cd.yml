@@ -101,7 +101,7 @@ jobs:
     - name: Deploy with Docker
       run: |
         docker build -t mydjangoapp cicdgithub/blog/
-        docker run -d -p 8000:8000 --name mydjangoapp-container --memory=4g --shm-size=256m mydjangoapp
+        docker run -d -p 8000:8000 --name mydjangoapp-container --memory=8g --shm-size=256m mydjangoapp
     
 
     # Konteynerin başlatılmasını bekleyin
