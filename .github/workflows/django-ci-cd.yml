@@ -103,10 +103,6 @@ jobs:
         docker build -t mydjangoapp cicdgithub/blog/
         docker run -d -p 8000:8000 --name mydjangoapp-container --memory=4g --memory-swap=8g --shm-size=1g mydjangoapp tail -f /dev/null
 
-    - name: Monitor Docker container stats continuously
-      run: |
-        docker stats mydjangoapp-container
-
     # Konteynerin başlatılmasını bekleyin
     - name: Wait for container to start
       run: |
