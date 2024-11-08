@@ -101,7 +101,7 @@ jobs:
     - name: Deploy with Docker
       run: |
         docker build -t mydjangoapp cicdgithub/blog/
-        docker run -d -p 8000:8000 --name mydjangoapp-container --memory=4g --memory-swap=8g --shm-size=1g mydjangoapp
+        docker run -d -p 8000:8000 --name mydjangoapp-container --memory=4g --memory-swap=8g --shm-size=1g mydjangoapp tail -f /dev/null
 
     - name: Monitor Docker container stats continuously
       run: |
