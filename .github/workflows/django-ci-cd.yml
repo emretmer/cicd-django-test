@@ -106,10 +106,10 @@ jobs:
 
     - name: Run tests inside Docker container
       run: |
-        docker exec mydjangoapp-container bash
-        python manage.py test posts.tests.test_hello_world.HelloWorldTest
+        docker exec mydjangoapp-container bash -c "python manage.py test posts.tests.test_hello_world.HelloWorldTest"
+  
 
     - name: Clean up Docker containers
       run: |
         docker stop mydjangoapp-container  # Konteynerı durdur
-        docker rm mydjangoapp-container  # Konteynerı sil
+        docker rm mydjangoapp-container  # Konteynerı sil-
