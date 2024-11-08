@@ -97,28 +97,27 @@ jobs:
           source venv/bin/activate  # Virtual environment'ı aktive et
           python cicdgithub/blog/manage.py collectstatic --noinput  # Statik dosyaları topla
 
-
-    - name: Wait for container to start
-      run: |
-          until docker ps | grep -q "mydjangoapp-container"; do
-            echo "Waiting for container to be ready..."
-            sleep 2
-          done
-       
     # Docker Deployment Adımları
     - name: Deploy with Docker
       run: |
         docker build -t mydjangoapp cicdgithub/blog/
         docker run -d -p 8000:8000 --name mydjangoapp-container --shm-size=256m mydjangoapp
- 
 
+    # Konteynerin başlatılmasını bekleyin
+    - name: Wait for container to start
+      run: |
+        until docker ps | grep -q "mydjangoapp-container"; do
+          echo "Waiting for container to be ready..."
+          sleep 2
+        done
+       
+    # Testleri çalıştırın
     - name: Run tests inside Docker container
       run: |
         docker exec mydjangoapp-container bash -c "python manage.py test posts.tests.test_hello_world.HelloWorldTest"
      
-
-
+    # Docker konteynerlarını temizleyin
     - name: Clean up Docker containers
       run: |
         docker stop mydjangoapp-container  # Konteynerı durdur
-        docker rm mydjangoapp-container  # Konteynerı sil-
+        docker rm mydjangoapp-container  # Konteynerı sil
