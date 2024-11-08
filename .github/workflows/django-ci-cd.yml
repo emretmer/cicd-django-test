@@ -100,14 +100,12 @@ jobs:
     # Docker Deployment Adımları
     - name: Deploy with Docker
       run: |
-        docker build -t mydjangoapp  cicdgithub/blog/  # Docker imajını oluştur
-        docker run -d -p 8000:8000 --name mydjangoapp-container mydjangoapp  # Docker konteynerını çalıştır
-        # Deploy işlemi sonrasında uygulamayı aktif et
+        docker build -t mydjangoapp cicdgithub/blog/  # Build Docker image
+        docker run -d -p 8000:8000 --memory="1g" --name mydjangoapp-container mydjangoapp  # Start container with memory limit
 
     - name: Run tests inside Docker container
       run: |
-        docker exec mydjangoapp-container bash -c "python manage.py test posts.tests.test_hello_world.HelloWorldTest"
-  
+        docker exec mydjangoapp-container bash -c "python manage.py test posts.tests.test_hello_world.HelloWorldTest"  # Run tests  
 
     - name: Clean up Docker containers
       run: |
